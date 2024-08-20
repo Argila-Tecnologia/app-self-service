@@ -1,6 +1,7 @@
 export default {
   COLORS: {
     WHITE: '#FFFFFF',
+    BLACK: '#000000',
 
     BRAND_LIGHT: '#00B37E',
     BRAND_MID: '#00875F',
@@ -13,6 +14,8 @@ export default {
     GRAY_800: '#202024',
     GRAY_700: '#29292E',
     GRAY_600: '#323238',
+
+    RED: 'red',
   },
   FONT_FAMILY: {
     REGULAR: 'Roboto_400Regular',

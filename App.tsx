@@ -30,6 +30,7 @@ export default function App() {
         barStyle="dark-content"
         backgroundColor="transparent"
         translucent
+        hidden
       />
 
       <HomeScreen />
