@@ -1,6 +1,6 @@
 import { Text } from 'react-native';
 
-import { ShoppingCart, Wallet } from 'phosphor-react-native';
+import { MagnifyingGlass, ShoppingCart, Wallet } from 'phosphor-react-native';
 
 import { useTheme } from '@theme/stitches.config';
 
@@ -10,10 +10,20 @@ import {
   HeaderActionsContainer,
   HeaderContainer,
   HeaderContent,
+  HeaderHeaderTableNumberButton,
+  HeaderHeaderTableNumberButtonText,
   HeaderLogo,
+  HeaderSearchContainer,
+  HeaderSearchContent,
+  HeaderSearchInput,
+  HeaderTableNumberContainer,
 } from './styles';
 
-export function Header() {
+interface IHeaderProps {
+  isSearchVisible?: boolean;
+}
+
+export function Header({ isSearchVisible = false }: IHeaderProps) {
   const theme = useTheme();
 
   return (
@@ -24,6 +34,24 @@ export function Header() {
         </HeaderLogo>
 
         <HeaderActionsContainer>
+          <HeaderTableNumberContainer>
+            <HeaderHeaderTableNumberButton>
+              <HeaderHeaderTableNumberButtonText>
+                MESA 01
+              </HeaderHeaderTableNumberButtonText>
+            </HeaderHeaderTableNumberButton>
+          </HeaderTableNumberContainer>
+
+          {isSearchVisible && (
+            <HeaderSearchContainer>
+              <MagnifyingGlass color={theme.colors.RED} size={30} />
+
+              <HeaderSearchContent>
+                <HeaderSearchInput placeholder="Buscar" />
+              </HeaderSearchContent>
+            </HeaderSearchContainer>
+          )}
+
           <HeaderActionButton>
             <Wallet color={theme.colors.WHITE} size={30} />
 
