@@ -63,14 +63,19 @@ export function HomeScreen() {
               <HomeFooterItemButtonText>Sobre</HomeFooterItemButtonText>
             </HomeFooterItemButton>
 
-            <HomeFooterNameProductText>SpaceTeam</HomeFooterNameProductText>
+            <HomeFooterNameProductText>Self</HomeFooterNameProductText>
           </HomeFooterContainer>
         </HomeCategoriesContainer>
 
         <HomeProductsContainer>
           <HomeProductsList
+            contentContainerStyle={{
+              paddingTop: 20,
+            }}
             data={DATA_PRODUCTS_FAKE}
             keyExtractor={(item) => item.id}
+            numColumns={3}
+            showsVerticalScrollIndicator={false}
             renderItem={({ item: product }) => (
               <CardProduct product={product} />
             )}

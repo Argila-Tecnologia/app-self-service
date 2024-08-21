@@ -1,10 +1,25 @@
 import { styled } from '@theme/stitches.config';
 
-export const CardProductContainer = styled('View', {
-  width: 300,
-  height: 500,
+import { Dimensions } from 'react-native';
+
+const dimensions = Dimensions.get('window');
+
+const CARDS_PER_ROW = 3;
+const HORIZONTAL_PADDING_SCREEN = 80 * CARDS_PER_ROW;
+const MARGIN = 6 * CARDS_PER_ROW;
+
+const CARD_WIDTH =
+  (dimensions.width - HORIZONTAL_PADDING_SCREEN - MARGIN) / CARDS_PER_ROW;
+
+export const CardProductContainer = styled('TouchableOpacity', {
+  width: CARD_WIDTH,
+  height: 300,
 
   backgroundColor: '$GRAY_300',
 
   borderRadius: 10,
+
+  padding: 16,
+
+  margin: MARGIN,
 });

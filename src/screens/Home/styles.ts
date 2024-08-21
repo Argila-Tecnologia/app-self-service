@@ -104,4 +104,8 @@ export const HomeProductsContainer = styled('View', {
 
 export const HomeProductsList = styled(FlatList<IProductDTO>, {
   width: '100%',
+
+  paddingHorizontal: 15,
+
+  marginTop: 20,
 });
