@@ -3,6 +3,7 @@ import { styled } from '../../theme/stitches.config';
 import { FlatList } from 'react-native';
 
 import { ICategory } from '@dtos/category-dto';
+import { IProductDTO } from '@dtos/product-dto';
 
 export const HomeContainer = styled('View', {
   flex: 1,
@@ -59,12 +60,6 @@ export const HomeCategoryItemButtonText = styled('Text', {
   textTransform: 'uppercase',
 });
 
-export const HomeProductsContainer = styled('View', {
-  flex: 1,
-
-  backgroundColor: '$GRAY_100',
-});
-
 export const HomeFooterContainer = styled('View', {
   flexDirection: 'column',
   alignItems: 'center',
@@ -99,4 +94,14 @@ export const HomeFooterNameProductText = styled('Text', {
   padding: 10,
 
   backgroundColor: '$GRAY_500',
+});
+
+export const HomeProductsContainer = styled('View', {
+  flex: 1,
+
+  backgroundColor: '$GRAY_100',
+});
+
+export const HomeProductsList = styled(FlatList<IProductDTO>, {
+  width: '100%',
 });
