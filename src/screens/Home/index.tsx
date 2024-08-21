@@ -1,12 +1,12 @@
 import { useCallback, useState } from 'react';
 
-import { fakeCategoriesData, fakeProductsData } from '@utils/fake-data';
-
 import { Header } from '@components/Header';
+
+import { MenuScreen } from '@screens/Home/subscreens/Menu';
 
 import {
   HomeCategoriesContainer,
-  HomeCategoriesList,
+  HomeMenu,
   HomeCategoryItemButton,
   HomeCategoryItemButtonText,
   HomeContainer,
@@ -16,19 +16,14 @@ import {
   HomeFooterItemButtonText,
   HomeFooterNameProductText,
   HomeProductsContainer,
-  HomeProductsList,
 } from './styles';
-import { CardProduct } from '@components/CardProduct';
-
-const DATA_CATEGORIES_FAKE = fakeCategoriesData();
-const DATA_PRODUCTS_FAKE = fakeProductsData();
 
 export function HomeScreen() {
-  const [categorySelected, setCategorySelected] = useState('');
+  const [menuSelected, setMenuSelected] = useState('');
 
   // FUNCTIONS
-  const handleCategorySelected = useCallback((categorySelected: string) => {
-    setCategorySelected(categorySelected);
+  const handleMenuSelected = useCallback((menuSelected: string) => {
+    setMenuSelected(menuSelected);
   }, []);
   // END FUNCTIONS
 
@@ -38,25 +33,34 @@ export function HomeScreen() {
 
       <HomeContent>
         <HomeCategoriesContainer>
-          <HomeCategoriesList
-            contentContainerStyle={{
-              paddingTop: 2,
-            }}
-            data={DATA_CATEGORIES_FAKE}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item: category }) => (
-              <HomeCategoryItemButton
-                selected={category.id === categorySelected}
-                onPress={() => {
-                  handleCategorySelected(category.id);
-                }}
-              >
-                <HomeCategoryItemButtonText>
-                  {category.name}
-                </HomeCategoryItemButtonText>
-              </HomeCategoryItemButton>
-            )}
-          />
+          <HomeMenu>
+            <HomeCategoryItemButton
+              selected={menuSelected === 'highlights'}
+              onPress={() => {
+                handleMenuSelected('highlights');
+              }}
+            >
+              <HomeCategoryItemButtonText>Destaques</HomeCategoryItemButtonText>
+            </HomeCategoryItemButton>
+
+            <HomeCategoryItemButton
+              selected={menuSelected === 'menu'}
+              onPress={() => {
+                handleMenuSelected('menu');
+              }}
+            >
+              <HomeCategoryItemButtonText>Cardápio</HomeCategoryItemButtonText>
+            </HomeCategoryItemButton>
+
+            <HomeCategoryItemButton
+              selected={menuSelected === 'offers'}
+              onPress={() => {
+                handleMenuSelected('offers');
+              }}
+            >
+              <HomeCategoryItemButtonText>Ofertas</HomeCategoryItemButtonText>
+            </HomeCategoryItemButton>
+          </HomeMenu>
 
           <HomeFooterContainer>
             <HomeFooterItemButton>
@@ -68,18 +72,7 @@ export function HomeScreen() {
         </HomeCategoriesContainer>
 
         <HomeProductsContainer>
-          <HomeProductsList
-            contentContainerStyle={{
-              paddingTop: 20,
-            }}
-            data={DATA_PRODUCTS_FAKE}
-            keyExtractor={(item) => item.id}
-            numColumns={3}
-            showsVerticalScrollIndicator={false}
-            renderItem={({ item: product }) => (
-              <CardProduct product={product} />
-            )}
-          />
+          <MenuScreen />
         </HomeProductsContainer>
       </HomeContent>
     </HomeContainer>

@@ -1,10 +1,5 @@
 import { styled } from '../../theme/stitches.config';
 
-import { FlatList } from 'react-native';
-
-import { ICategory } from '@dtos/category-dto';
-import { IProductDTO } from '@dtos/product-dto';
-
 export const HomeContainer = styled('View', {
   flex: 1,
 });
@@ -23,11 +18,13 @@ export const HomeCategoriesContainer = styled('View', {
   backgroundColor: '$GRAY_600',
 });
 
-export const HomeCategoriesList = styled(FlatList<ICategory>, {
+export const HomeMenu = styled('View', {
   minWidth: 120,
   maxWidth: 120,
 
   flex: 1,
+  alignItems: 'center',
+  justifyContent: 'center',
 
   marginVertical: 30,
 });
@@ -99,13 +96,5 @@ export const HomeFooterNameProductText = styled('Text', {
 export const HomeProductsContainer = styled('View', {
   flex: 1,
 
-  backgroundColor: '$GRAY_100',
-});
-
-export const HomeProductsList = styled(FlatList<IProductDTO>, {
-  width: '100%',
-
-  paddingHorizontal: 15,
-
-  marginTop: 20,
+  backgroundColor: '$GRAY_600',
 });
