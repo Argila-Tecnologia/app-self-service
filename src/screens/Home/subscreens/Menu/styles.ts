@@ -8,6 +8,8 @@ import { ICategory } from '@dtos/category-dto';
 export const MenuContainer = styled('View', {
   flex: 1,
   flexDirection: 'row',
+
+  backgroundColor: '$GRAY_500',
 });
 
 export const MenuCategoriesList = styled(FlatList<ICategory>, {

@@ -24,24 +24,58 @@ export const ItemCardProductImage = styled('Image', {
   marginRight: 20,
 });
 
-export const ItemCardProductContent = styled('View', {});
-
-export const ItemCardProductInfo = styled('View', {
+export const ItemCardProductContent = styled('View', {
+  flex: 1,
   padding: 10,
 });
 
-export const ItemCardProductTitle = styled('Text', {
-  fontFamily: '$BOLD',
-  fontSize: '$XXL',
-  color: '$GRAY_100',
+export const ItemCardProductNameAndPriceContainer = styled('View', {
+  width: '100%',
+
+  flexDirection: 'row',
+  justifyContent: 'space-between',
 
   marginBottom: 10,
 });
 
-export const ItemCardProductDescription = styled('Text', {
+export const ItemCardProductName = styled('Text', {
+  flex: 1,
+
+  fontFamily: '$BOLD',
+  fontSize: '$XXL',
+  color: '$GRAY_100',
+});
+
+export const ItemCardProductPriceContainer = styled('View', {
+  flexDirection: 'column',
+  alignItems: 'flex-end',
+
+  marginLeft: 10,
+});
+
+export const ItemCardProductPrice = styled('Text', {
   fontFamily: '$REGULAR',
   fontSize: '$LG',
   color: '$GRAY_100',
 });
 
-export const ItemCardProductFooter = styled('View', {});
+export const ItemCardProductPromotion = styled('Text', {
+  fontFamily: '$REGULAR',
+  fontSize: '$LG',
+  color: '$GRAY_100',
+});
+
+export const ItemCardProductDescription = styled('Text', {
+  flex: 1,
+
+  fontFamily: '$REGULAR',
+  fontSize: '$LG',
+  color: '$GRAY_100',
+});
+
+export const ItemCardProductFooter = styled('View', {
+  flexDirection: 'row',
+  justifyContent: 'flex-end',
+
+  marginTop: 10,
+});

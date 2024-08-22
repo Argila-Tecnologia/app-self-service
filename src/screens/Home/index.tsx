@@ -18,13 +18,24 @@ import {
   HomeProductsContainer,
 } from './styles';
 
+enum MENU_CATEGORY {
+  HIGHLIGHTS = 'highlights',
+  MENU = 'menu',
+  OFFERS = 'offers',
+  NOTHING = '',
+}
+
 export function HomeScreen() {
-  const [menuSelected, setMenuSelected] = useState('');
+  const [menuSelected, setMenuSelected] =
+    useState<keyof typeof MENU_CATEGORY>('NOTHING');
 
   // FUNCTIONS
-  const handleMenuSelected = useCallback((menuSelected: string) => {
-    setMenuSelected(menuSelected);
-  }, []);
+  const handleMenuSelected = useCallback(
+    (menuSelected: keyof typeof MENU_CATEGORY) => {
+      setMenuSelected(menuSelected);
+    },
+    [],
+  );
   // END FUNCTIONS
 
   return (
@@ -35,27 +46,27 @@ export function HomeScreen() {
         <HomeCategoriesContainer>
           <HomeMenu>
             <HomeCategoryItemButton
-              selected={menuSelected === 'highlights'}
+              selected={menuSelected === 'HIGHLIGHTS'}
               onPress={() => {
-                handleMenuSelected('highlights');
+                handleMenuSelected('HIGHLIGHTS');
               }}
             >
               <HomeCategoryItemButtonText>Destaques</HomeCategoryItemButtonText>
             </HomeCategoryItemButton>
 
             <HomeCategoryItemButton
-              selected={menuSelected === 'menu'}
+              selected={menuSelected === 'MENU'}
               onPress={() => {
-                handleMenuSelected('menu');
+                handleMenuSelected('MENU');
               }}
             >
               <HomeCategoryItemButtonText>Cardápio</HomeCategoryItemButtonText>
             </HomeCategoryItemButton>
 
             <HomeCategoryItemButton
-              selected={menuSelected === 'offers'}
+              selected={menuSelected === 'OFFERS'}
               onPress={() => {
-                handleMenuSelected('offers');
+                handleMenuSelected('OFFERS');
               }}
             >
               <HomeCategoryItemButtonText>Ofertas</HomeCategoryItemButtonText>
@@ -72,7 +83,7 @@ export function HomeScreen() {
         </HomeCategoriesContainer>
 
         <HomeProductsContainer>
-          <MenuScreen />
+          {menuSelected === 'MENU' && <MenuScreen />}
         </HomeProductsContainer>
       </HomeContent>
     </HomeContainer>

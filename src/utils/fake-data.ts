@@ -54,7 +54,8 @@ export function fakeProductsData() {
       id: '1',
       name: 'X-Burger',
       description: 'Hamburger tradicional',
-      price: 10000,
+      price: 1050,
+      price_promotional: 500,
       image_url: '',
     },
     {
