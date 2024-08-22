@@ -3,9 +3,10 @@ import { TouchableOpacityProps } from 'react-native';
 import { Loading } from '@components/Loading';
 
 import { ButtonContainer, ButtonText } from './styles';
+import { ReactNode } from 'react';
 
 interface IButtonProps extends TouchableOpacityProps {
-  children: string;
+  children: ReactNode;
   loading?: boolean;
   contentStyle?: NonNullable<unknown>;
 }

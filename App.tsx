@@ -8,9 +8,9 @@ import {
   useFonts,
 } from '@expo-google-fonts/roboto';
 
-// import { Routes } from '@routes/index';
+import { Routes } from '@routes/index';
 
-import { HomeScreen } from '@screens/Home';
+// import { HomeScreen } from '@screens/Home';
 
 import { Loading } from '@components/Loading';
 
@@ -33,8 +33,8 @@ export default function App() {
         hidden
       />
 
-      <HomeScreen />
-      {/* <Routes /> */}
+      {/* <HomeScreen /> */}
+      <Routes />
     </ThemeProvider>
   );
 }

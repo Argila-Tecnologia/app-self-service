@@ -1,16 +1,15 @@
 import { IProductDTO } from '@dtos/product-dto';
 
+import { useNavigation } from '@react-navigation/native';
+
 import { transformPriceCentsToDecimal } from '@utils/transform-price-cents-to-decimal';
 
 import PizzaImg from '@assets/pizza-portuguesa.jpg';
-
-import { Button } from '@components/Button';
 
 import {
   ItemCardProductContainer,
   ItemCardProductContent,
   ItemCardProductDescription,
-  ItemCardProductFooter,
   ItemCardProductImage,
   ItemCardProductName,
   ItemCardProductNameAndPriceContainer,
@@ -18,14 +17,31 @@ import {
   ItemCardProductPriceContainer,
   ItemCardProductPromotion,
 } from './styles';
+import { useCallback } from 'react';
 
 interface ICardProductProps {
   product: IProductDTO;
 }
 
 export function ItemCardProduct({ product }: ICardProductProps) {
+  const navigation = useNavigation();
+
+  // FUNCTIONS
+  const handleDetailProductNavigation = useCallback(
+    (productId: string) => {
+      navigation.navigate('detailProductScreen', { productId });
+    },
+    [navigation],
+  );
+  // END FUNCTIONS
+
   return (
-    <ItemCardProductContainer activeOpacity={0.7}>
+    <ItemCardProductContainer
+      activeOpacity={0.7}
+      onPress={() => {
+        handleDetailProductNavigation(product.id);
+      }}
+    >
       <ItemCardProductImage source={PizzaImg} resizeMode="cover" />
 
       <ItemCardProductContent>
@@ -59,11 +75,11 @@ export function ItemCardProduct({ product }: ICardProductProps) {
           {product.description}
         </ItemCardProductDescription>
 
-        <ItemCardProductFooter>
+        {/* <ItemCardProductFooter>
           <Button contentStyle={{ width: 200, minHeight: 45, maxHeight: 45 }}>
             Adicionar ao carrinho
           </Button>
-        </ItemCardProductFooter>
+        </ItemCardProductFooter> */}
       </ItemCardProductContent>
     </ItemCardProductContainer>
   );
