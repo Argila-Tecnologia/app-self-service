@@ -22,7 +22,6 @@ export function Routes() {
       <NavigationContainer theme={theme}>
         <AppRoutes />
       </NavigationContainer>
-      ;
     </View>
   );
 }
