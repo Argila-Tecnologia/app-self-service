@@ -96,5 +96,5 @@ export const HomeFooterNameProductText = styled('Text', {
 export const HomeProductsContainer = styled('View', {
   flex: 1,
 
-  backgroundColor: '$GRAY_600',
+  backgroundColor: '$GRAY_500',
 });
