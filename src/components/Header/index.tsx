@@ -1,6 +1,6 @@
 import { Text } from 'react-native';
 
-import { MagnifyingGlass, ShoppingCart, Wallet } from 'phosphor-react-native';
+import { MagnifyingGlass, Notepad, Wallet } from 'phosphor-react-native';
 
 import { useTheme } from '@theme/stitches.config';
 
@@ -59,9 +59,9 @@ export function Header({ isSearchVisible = false }: IHeaderProps) {
           </HeaderActionButton>
 
           <HeaderActionButton>
-            <ShoppingCart color={theme.colors.WHITE} size={30} />
+            <Notepad color={theme.colors.WHITE} size={30} />
 
-            <HeaderActionButtonText>Carrinho</HeaderActionButtonText>
+            <HeaderActionButtonText>Pedido</HeaderActionButtonText>
           </HeaderActionButton>
         </HeaderActionsContainer>
       </HeaderContent>

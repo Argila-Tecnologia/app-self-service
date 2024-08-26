@@ -10,13 +10,13 @@ export function Routes() {
   const themeStitches = useTheme();
 
   const theme = DefaultTheme;
-  theme.colors.background = themeStitches.colors.BLACK;
+  theme.colors.background = themeStitches.colors.GRAY_600;
 
   return (
     <View
       style={{
         flex: 1,
-        backgroundColor: themeStitches.colors.BLACK,
+        backgroundColor: themeStitches.colors.GRAY_600,
       }}
     >
       <NavigationContainer theme={theme}>

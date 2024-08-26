@@ -11,6 +11,7 @@ export function AppRoutes() {
       initialRouteName="homeScreen"
       screenOptions={{
         headerShown: false,
+        gestureEnabled: false,
       }}
     >
       <Screen name="homeScreen" component={HomeScreen} />
