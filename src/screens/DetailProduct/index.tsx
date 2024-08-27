@@ -20,12 +20,15 @@ import {
   DetailProductAdditionalAndObservationItemWrapper,
   DetailProductAdditionalAndObservationTitle,
   DetailProductAdditionalContainer,
+  DetailProductAdditionalList,
   DetailProductBackButton,
   DetailProductContainer,
   DetailProductContent,
   DetailProductDescription,
   DetailProductFooterAdditionalProductObservationWrapper,
   DetailProductFooterContainer,
+  DetailProductFooterPriceText,
+  DetailProductFooterPriceWrapper,
   DetailProductFooterQuantityContainer,
   DetailProductFooterQuantityPriceAddItemWrapper,
   DetailProductFooterQuantityText,
@@ -33,9 +36,24 @@ import {
   DetailProductImage,
   DetailProductImageContainer,
   DetailProductObservationContainer,
+  DetailProductObservationList,
   DetailProductTitle,
   DetailProductWrapper,
 } from './styles';
+
+export type IAdditionalItem = {
+  id: string;
+  name: string;
+  quantity: number;
+  price: number;
+};
+
+export type IObservationItem = {
+  id: string;
+  name: string;
+};
+
+const DIVISOR_CENTS = 100;
 
 export function DetailProductScreen() {
   const [quantity, setQuantity] = useState(1);
@@ -93,9 +111,9 @@ export function DetailProductScreen() {
           onPress={handleNavigationBack}
         >
           <ArrowLeft color={theme.colors.GRAY_100} size={25} />
-        </DetailProductBackButton>
 
-        <DetailProductTitle>NOME DO PRODUTO</DetailProductTitle>
+          <DetailProductTitle>Pizza Portuguesa</DetailProductTitle>
+        </DetailProductBackButton>
       </DetailProductHeader>
 
       <DetailProductWrapper>
@@ -124,15 +142,31 @@ export function DetailProductScreen() {
               Adicionais
             </DetailProductAdditionalAndObservationTitle>
 
-            <DetailProductAdditionalAndObservationItemWrapper>
-              <DetailProductAdditionalAndObservationItem>
-                1 x Azeitona
-              </DetailProductAdditionalAndObservationItem>
+            <DetailProductAdditionalList
+              data={[
+                {
+                  id: '1',
+                  name: 'Azeitona',
+                  quantity: 1,
+                  price: 500,
+                },
+              ]}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item: additional }) => (
+                <DetailProductAdditionalAndObservationItemWrapper>
+                  <DetailProductAdditionalAndObservationItem>
+                    {additional.quantity.toString()} x {additional.name}
+                  </DetailProductAdditionalAndObservationItem>
 
-              <DetailProductAdditionalAndObservationItemPrice>
-                R$ 1,00
-              </DetailProductAdditionalAndObservationItemPrice>
-            </DetailProductAdditionalAndObservationItemWrapper>
+                  <DetailProductAdditionalAndObservationItemPrice>
+                    {new Intl.NumberFormat('pt-BR', {
+                      style: 'currency',
+                      currency: 'BRL',
+                    }).format(additional.price / DIVISOR_CENTS)}
+                  </DetailProductAdditionalAndObservationItemPrice>
+                </DetailProductAdditionalAndObservationItemWrapper>
+              )}
+            />
           </DetailProductAdditionalContainer>
 
           <DetailProductObservationContainer>
@@ -140,25 +174,38 @@ export function DetailProductScreen() {
               Observações
             </DetailProductAdditionalAndObservationTitle>
 
-            <DetailProductAdditionalAndObservationItemWrapper>
-              <DetailProductAdditionalAndObservationItem>
-                Sem oregano
-              </DetailProductAdditionalAndObservationItem>
-            </DetailProductAdditionalAndObservationItemWrapper>
+            <DetailProductObservationList
+              data={[
+                {
+                  id: '1',
+                  name: 'Sem orégano',
+                },
+              ]}
+              keyExtractor={(item) => item.id}
+              renderItem={({ item: observation }) => (
+                <DetailProductAdditionalAndObservationItemWrapper>
+                  <DetailProductAdditionalAndObservationItem>
+                    {observation.name}
+                  </DetailProductAdditionalAndObservationItem>
+                </DetailProductAdditionalAndObservationItemWrapper>
+              )}
+            />
           </DetailProductObservationContainer>
         </DetailProductAdditionalAndObservationContainer>
       </DetailProductWrapper>
 
       <DetailProductFooterContainer>
         <DetailProductFooterAdditionalProductObservationWrapper>
-          <Button>Adicionais</Button>
+          <Button style={{ marginRight: 16 }} size="small">
+            Adicionais
+          </Button>
 
-          <Button>Observações</Button>
+          <Button size="small">Observações</Button>
         </DetailProductFooterAdditionalProductObservationWrapper>
 
         <DetailProductFooterQuantityPriceAddItemWrapper>
           <DetailProductFooterQuantityContainer>
-            <Button contentStyle={{ flex: 1 }} onPress={handleAddMinus}>
+            <Button onPress={handleAddMinus} textSize="XXXL">
               -
             </Button>
 
@@ -166,12 +213,21 @@ export function DetailProductScreen() {
               {quantity.toString()}
             </DetailProductFooterQuantityText>
 
-            <Button contentStyle={{ flex: 1 }} onPress={handleAddQuantity}>
+            <Button onPress={handleAddQuantity} textSize="XXL">
               +
             </Button>
           </DetailProductFooterQuantityContainer>
 
-          <Button contentStyle={{ width: 200 }}>Adicionar ao pedido</Button>
+          <DetailProductFooterPriceWrapper>
+            <DetailProductFooterPriceText>
+              {new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+              }).format(1500 / DIVISOR_CENTS)}
+            </DetailProductFooterPriceText>
+          </DetailProductFooterPriceWrapper>
+
+          <Button style={{ maxWidth: 200 }}>Adicionar ao pedido</Button>
         </DetailProductFooterQuantityPriceAddItemWrapper>
       </DetailProductFooterContainer>
     </DetailProductContainer>

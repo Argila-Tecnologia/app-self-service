@@ -1,13 +1,17 @@
 import { styled } from '@theme/stitches.config';
 
+import { FlatList } from 'react-native';
+
+import { IAdditionalItem, IObservationItem } from '.';
+
 export const DetailProductContainer = styled('View', {
   flex: 1,
 });
 
 export const DetailProductHeader = styled('View', {
   width: '100%',
-  minHeight: 60,
-  maxHeight: 60,
+  minHeight: 70,
+  maxHeight: 70,
 
   flexDirection: 'row',
   alignItems: 'center',
@@ -30,13 +34,17 @@ export const DetailProductContent = styled('View', {
 });
 
 export const DetailProductBackButton = styled('TouchableOpacity', {
-  marginRight: 10,
+  flexDirection: 'row',
+  alignItems: 'center',
 });
 
 export const DetailProductTitle = styled('Text', {
   fontFamily: '$BOLD',
-  fontSize: '$LG',
+  fontSize: '$XL',
   color: '$GRAY_100',
+  textTransform: 'uppercase',
+
+  marginLeft: 10,
 });
 
 export const DetailProductImageContainer = styled('View', {
@@ -87,8 +95,16 @@ export const DetailProductObservationContainer = styled('View', {
   paddingHorizontal: 10,
 });
 
+export const DetailProductAdditionalList = styled(FlatList<IAdditionalItem>, {
+  flex: 1,
+});
+
+export const DetailProductObservationList = styled(FlatList<IObservationItem>, {
+  flex: 1,
+});
+
 export const DetailProductAdditionalAndObservationTitle = styled('Text', {
-  fontFamily: '$REGULAR',
+  fontFamily: '$BOLD',
   fontSize: '$MD',
   color: '$GRAY_100',
   textTransform: 'uppercase',
@@ -107,7 +123,7 @@ export const DetailProductAdditionalAndObservationItem = styled('Text', {
   flex: 1,
 
   fontFamily: '$REGULAR',
-  fontSize: '$sm',
+  fontSize: '$SM',
   color: '$WHITE',
   textTransform: 'uppercase',
 
@@ -116,13 +132,13 @@ export const DetailProductAdditionalAndObservationItem = styled('Text', {
 
 export const DetailProductAdditionalAndObservationItemPrice = styled('Text', {
   fontFamily: '$REGULAR',
-  fontSize: '$sm',
+  fontSize: '$SM',
   color: '$WHITE',
   textTransform: 'uppercase',
 });
 
 export const DetailProductFooterContainer = styled('View', {
-  width: '100%',
+  // width: '100%',
   // minHeight: 60,
   // maxHeight: 60,
 
@@ -131,7 +147,7 @@ export const DetailProductFooterContainer = styled('View', {
 
   padding: 10,
 
-  backgroundColor: '$GRAY_500',
+  backgroundColor: '$GRAY_300',
 });
 
 export const DetailProductFooterAdditionalProductObservationWrapper = styled(
@@ -139,18 +155,20 @@ export const DetailProductFooterAdditionalProductObservationWrapper = styled(
   {
     flex: 1,
     flexDirection: 'row',
-
-    backgroundColor: '$BRAND_LIGHT',
+    justifyContent: 'flex-start',
 
     marginRight: 30,
+
+    paddingLeft: 10,
   },
 );
 
 export const DetailProductFooterQuantityPriceAddItemWrapper = styled('View', {
   flex: 1,
   flexDirection: 'row',
+  justifyContent: 'flex-end',
 
-  backgroundColor: '$BRAND_LIGHT',
+  paddingRight: 10,
 });
 
 export const DetailProductFooterQuantityContainer = styled('View', {
@@ -161,8 +179,6 @@ export const DetailProductFooterQuantityContainer = styled('View', {
   backgroundColor: '$GRAY_600',
 
   borderRadius: 10,
-
-  marginRight: 50,
 });
 
 export const DetailProductFooterQuantityText = styled('Text', {
@@ -174,4 +190,22 @@ export const DetailProductFooterQuantityText = styled('Text', {
   textAlign: 'center',
 
   paddingHorizontal: 10,
+});
+
+export const DetailProductFooterPriceWrapper = styled('View', {
+  flex: 1,
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'center',
+
+  // backgroundColor: '$BRAND_LIGHT',
+
+  marginHorizontal: 10,
+});
+
+export const DetailProductFooterPriceText = styled('Text', {
+  fontFamily: '$BOLD',
+  fontSize: '$XXL',
+  color: '$WHITE',
+  textAlign: 'center',
 });
