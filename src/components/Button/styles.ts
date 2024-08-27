@@ -3,7 +3,8 @@ import { styled } from '@theme/stitches.config';
 import { TouchableOpacity } from 'react-native';
 
 export const ButtonContainer = styled(TouchableOpacity, {
-  width: '100%',
+  // width: '100%',
+  flex: 1,
   minHeight: 60,
   maxHeight: 60,
 

@@ -14,17 +14,27 @@ import { Header } from '@components/Header';
 import { Button } from '@components/Button';
 
 import {
+  DetailProductAdditionalAndObservationContainer,
+  DetailProductAdditionalAndObservationItem,
+  DetailProductAdditionalAndObservationItemPrice,
+  DetailProductAdditionalAndObservationItemWrapper,
+  DetailProductAdditionalAndObservationTitle,
+  DetailProductAdditionalContainer,
   DetailProductBackButton,
   DetailProductContainer,
   DetailProductContent,
   DetailProductDescription,
-  DetailProductFooter,
+  DetailProductFooterAdditionalProductObservationWrapper,
+  DetailProductFooterContainer,
   DetailProductFooterQuantityContainer,
+  DetailProductFooterQuantityPriceAddItemWrapper,
   DetailProductFooterQuantityText,
   DetailProductHeader,
   DetailProductImage,
   DetailProductImageContainer,
+  DetailProductObservationContainer,
   DetailProductTitle,
+  DetailProductWrapper,
 } from './styles';
 
 export function DetailProductScreen() {
@@ -88,42 +98,82 @@ export function DetailProductScreen() {
         <DetailProductTitle>NOME DO PRODUTO</DetailProductTitle>
       </DetailProductHeader>
 
-      <ScrollView
-        style={{ flexGrow: 1 }}
-        showsVerticalScrollIndicator={false}
-        keyboardShouldPersistTaps="handled"
-      >
-        <DetailProductContent>
-          <DetailProductImageContainer>
-            <DetailProductImage source={PizzaImg} resizeMode="contain" />
-          </DetailProductImageContainer>
+      <DetailProductWrapper>
+        <ScrollView
+          style={{ flexGrow: 1 }}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+        >
+          <DetailProductContent>
+            <DetailProductImageContainer>
+              <DetailProductImage source={PizzaImg} resizeMode="cover" />
+            </DetailProductImageContainer>
 
-          <DetailProductDescription>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
-            rerum nam neque? Officia similique aut iure temporibus ullam,
-            laborum tenetur laudantium nostrum doloribus modi, suscipit optio
-            et? Beatae, voluptate unde?
-          </DetailProductDescription>
-        </DetailProductContent>
-      </ScrollView>
+            <DetailProductDescription>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi
+              rerum nam neque? Officia similique aut iure temporibus ullam,
+              laborum tenetur laudantium nostrum doloribus modi, suscipit optio
+              et? Beatae, voluptate unde?
+            </DetailProductDescription>
+          </DetailProductContent>
+        </ScrollView>
 
-      <DetailProductFooter>
-        <DetailProductFooterQuantityContainer>
-          <Button contentStyle={{ width: 60 }} onPress={handleAddMinus}>
-            -
-          </Button>
+        <DetailProductAdditionalAndObservationContainer>
+          <DetailProductAdditionalContainer>
+            <DetailProductAdditionalAndObservationTitle>
+              Adicionais
+            </DetailProductAdditionalAndObservationTitle>
 
-          <DetailProductFooterQuantityText>
-            {quantity.toString()}
-          </DetailProductFooterQuantityText>
+            <DetailProductAdditionalAndObservationItemWrapper>
+              <DetailProductAdditionalAndObservationItem>
+                1 x Azeitona
+              </DetailProductAdditionalAndObservationItem>
 
-          <Button contentStyle={{ width: 60 }} onPress={handleAddQuantity}>
-            +
-          </Button>
-        </DetailProductFooterQuantityContainer>
+              <DetailProductAdditionalAndObservationItemPrice>
+                R$ 1,00
+              </DetailProductAdditionalAndObservationItemPrice>
+            </DetailProductAdditionalAndObservationItemWrapper>
+          </DetailProductAdditionalContainer>
 
-        <Button contentStyle={{ width: 200 }}>Adicionar ao pedido</Button>
-      </DetailProductFooter>
+          <DetailProductObservationContainer>
+            <DetailProductAdditionalAndObservationTitle>
+              Observações
+            </DetailProductAdditionalAndObservationTitle>
+
+            <DetailProductAdditionalAndObservationItemWrapper>
+              <DetailProductAdditionalAndObservationItem>
+                Sem oregano
+              </DetailProductAdditionalAndObservationItem>
+            </DetailProductAdditionalAndObservationItemWrapper>
+          </DetailProductObservationContainer>
+        </DetailProductAdditionalAndObservationContainer>
+      </DetailProductWrapper>
+
+      <DetailProductFooterContainer>
+        <DetailProductFooterAdditionalProductObservationWrapper>
+          <Button>Adicionais</Button>
+
+          <Button>Observações</Button>
+        </DetailProductFooterAdditionalProductObservationWrapper>
+
+        <DetailProductFooterQuantityPriceAddItemWrapper>
+          <DetailProductFooterQuantityContainer>
+            <Button contentStyle={{ flex: 1 }} onPress={handleAddMinus}>
+              -
+            </Button>
+
+            <DetailProductFooterQuantityText>
+              {quantity.toString()}
+            </DetailProductFooterQuantityText>
+
+            <Button contentStyle={{ flex: 1 }} onPress={handleAddQuantity}>
+              +
+            </Button>
+          </DetailProductFooterQuantityContainer>
+
+          <Button contentStyle={{ width: 200 }}>Adicionar ao pedido</Button>
+        </DetailProductFooterQuantityPriceAddItemWrapper>
+      </DetailProductFooterContainer>
     </DetailProductContainer>
   );
 }
