@@ -95,6 +95,12 @@ export const DetailProductObservationContainer = styled('View', {
   paddingHorizontal: 10,
 });
 
+export const DetailProductEmptyListText = styled('Text', {
+  fontFamily: '$REGULAR',
+  fontSize: '$MD',
+  color: '$GRAY_100',
+});
+
 export const DetailProductAdditionalList = styled(FlatList<IAdditionalItem>, {
   flex: 1,
 });

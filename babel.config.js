@@ -22,7 +22,8 @@ module.exports = function(api) {
           },
         }
       ],
-      ['@babel/plugin-proposal-decorators', { 'legacy': true }]
+      ['@babel/plugin-proposal-decorators', { 'legacy': true }],
+      'react-native-reanimated/plugin'
     ],
   };
 };

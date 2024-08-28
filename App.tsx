@@ -1,5 +1,7 @@
 import { StatusBar } from 'react-native';
 
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 import { theme, ThemeProvider } from '@theme/stitches.config';
 
 import {
@@ -9,8 +11,6 @@ import {
 } from '@expo-google-fonts/roboto';
 
 import { Routes } from '@routes/index';
-
-// import { HomeScreen } from '@screens/Home';
 
 import { Loading } from '@components/Loading';
 
@@ -26,15 +26,16 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <StatusBar
-        barStyle="dark-content"
-        backgroundColor="transparent"
-        translucent
-        hidden
-      />
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <StatusBar
+          barStyle="dark-content"
+          backgroundColor="transparent"
+          translucent
+          hidden
+        />
 
-      {/* <HomeScreen /> */}
-      <Routes />
+        <Routes />
+      </GestureHandlerRootView>
     </ThemeProvider>
   );
 }

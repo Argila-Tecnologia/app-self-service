@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { ScrollView, BackHandler } from 'react-native';
 
@@ -8,10 +8,13 @@ import { ArrowLeft } from 'phosphor-react-native';
 
 import { useTheme } from '@theme/stitches.config';
 
+import { BottomSheetModal } from '@gorhom/bottom-sheet';
+
 import PizzaImg from '@assets/pizza-portuguesa.jpg';
 
 import { Header } from '@components/Header';
 import { Button } from '@components/Button';
+import { AdditionalBottomSheetModal } from '@screens/DetailProduct/components/AdditionalBottomSheetModal';
 
 import {
   DetailProductAdditionalAndObservationContainer,
@@ -25,6 +28,7 @@ import {
   DetailProductContainer,
   DetailProductContent,
   DetailProductDescription,
+  DetailProductEmptyListText,
   DetailProductFooterAdditionalProductObservationWrapper,
   DetailProductFooterContainer,
   DetailProductFooterPriceText,
@@ -40,6 +44,7 @@ import {
   DetailProductTitle,
   DetailProductWrapper,
 } from './styles';
+import { ObservationBottomSheetModal } from './components/ObservationBottomSheetModal';
 
 export type IAdditionalItem = {
   id: string;
@@ -60,11 +65,21 @@ export function DetailProductScreen() {
 
   const theme = useTheme();
   const navigation = useNavigation();
+  const additionalBottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const observationBottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   // FUNCTIONS
   const handleNavigationBack = useCallback(() => {
     navigation.navigate('homeScreen');
   }, [navigation]);
+
+  const handleAdditionalPresentModal = useCallback(() => {
+    additionalBottomSheetModalRef.current?.present();
+  }, []);
+
+  const handleObservationPresentModal = useCallback(() => {
+    observationBottomSheetModalRef.current?.present();
+  }, []);
 
   const handleAddMinus = useCallback(() => {
     const quantityNumber = Number(quantity);
@@ -143,6 +158,13 @@ export function DetailProductScreen() {
             </DetailProductAdditionalAndObservationTitle>
 
             <DetailProductAdditionalList
+              contentContainerStyle={
+                1 + 2 === 2 && {
+                  flex: 1,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }
+              }
               data={[
                 {
                   id: '1',
@@ -166,6 +188,11 @@ export function DetailProductScreen() {
                   </DetailProductAdditionalAndObservationItemPrice>
                 </DetailProductAdditionalAndObservationItemWrapper>
               )}
+              ListEmptyComponent={() => (
+                <DetailProductEmptyListText>
+                  Nenhum adicional escolhido
+                </DetailProductEmptyListText>
+              )}
             />
           </DetailProductAdditionalContainer>
 
@@ -175,6 +202,13 @@ export function DetailProductScreen() {
             </DetailProductAdditionalAndObservationTitle>
 
             <DetailProductObservationList
+              contentContainerStyle={
+                1 + 2 === 2 && {
+                  flex: 1,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }
+              }
               data={[
                 {
                   id: '1',
@@ -189,6 +223,11 @@ export function DetailProductScreen() {
                   </DetailProductAdditionalAndObservationItem>
                 </DetailProductAdditionalAndObservationItemWrapper>
               )}
+              ListEmptyComponent={() => (
+                <DetailProductEmptyListText>
+                  Nenhum adicional escolhido
+                </DetailProductEmptyListText>
+              )}
             />
           </DetailProductObservationContainer>
         </DetailProductAdditionalAndObservationContainer>
@@ -196,11 +235,17 @@ export function DetailProductScreen() {
 
       <DetailProductFooterContainer>
         <DetailProductFooterAdditionalProductObservationWrapper>
-          <Button style={{ marginRight: 16 }} size="small">
+          <Button
+            style={{ marginRight: 16 }}
+            size="small"
+            onPress={handleAdditionalPresentModal}
+          >
             Adicionais
           </Button>
 
-          <Button size="small">Observações</Button>
+          <Button size="small" onPress={handleObservationPresentModal}>
+            Observações
+          </Button>
         </DetailProductFooterAdditionalProductObservationWrapper>
 
         <DetailProductFooterQuantityPriceAddItemWrapper>
@@ -230,6 +275,16 @@ export function DetailProductScreen() {
           <Button style={{ maxWidth: 200 }}>Adicionar ao pedido</Button>
         </DetailProductFooterQuantityPriceAddItemWrapper>
       </DetailProductFooterContainer>
+
+      {/* MODALS */}
+      <AdditionalBottomSheetModal
+        bottomSheetModalRef={additionalBottomSheetModalRef}
+      />
+
+      <ObservationBottomSheetModal
+        bottomSheetModalRef={observationBottomSheetModalRef}
+      />
+      {/* END MODALS */}
     </DetailProductContainer>
   );
 }
