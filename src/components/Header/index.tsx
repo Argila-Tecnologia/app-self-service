@@ -53,15 +53,15 @@ export function Header({ isSearchVisible = false }: IHeaderProps) {
           )}
 
           <HeaderActionButton>
-            <Wallet color={theme.colors.WHITE} size={30} />
-
-            <HeaderActionButtonText>Minha conta</HeaderActionButtonText>
-          </HeaderActionButton>
-
-          <HeaderActionButton>
             <Notepad color={theme.colors.WHITE} size={30} />
 
             <HeaderActionButtonText>Pedido</HeaderActionButtonText>
+          </HeaderActionButton>
+
+          <HeaderActionButton>
+            <Wallet color={theme.colors.WHITE} size={30} />
+
+            <HeaderActionButtonText>Minha conta</HeaderActionButtonText>
           </HeaderActionButton>
         </HeaderActionsContainer>
       </HeaderContent>

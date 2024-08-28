@@ -13,8 +13,9 @@ import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import PizzaImg from '@assets/pizza-portuguesa.jpg';
 
 import { Header } from '@components/Header';
-import { Button } from '@components/Button';
+import { Button } from '@components/Form/Button';
 import { AdditionalBottomSheetModal } from '@screens/DetailProduct/components/AdditionalBottomSheetModal';
+import { ObservationBottomSheetModal } from './components/ObservationBottomSheetModal';
 
 import {
   DetailProductAdditionalAndObservationContainer,
@@ -44,7 +45,6 @@ import {
   DetailProductTitle,
   DetailProductWrapper,
 } from './styles';
-import { ObservationBottomSheetModal } from './components/ObservationBottomSheetModal';
 
 export type IAdditionalItem = {
   id: string;
