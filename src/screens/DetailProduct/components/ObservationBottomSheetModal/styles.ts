@@ -26,6 +26,8 @@ export const ObservationList = styled(BottomSheetFlatList<IObservationDTO>, {});
 export const ObservationItemCheckButton = styled('TouchableOpacity', {
   flexDirection: 'row',
   alignItems: 'center',
+
+  marginBottom: 10,
 });
 
 export const ObservationItemName = styled('Text', {

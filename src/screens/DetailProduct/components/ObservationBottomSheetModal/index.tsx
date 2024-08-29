@@ -6,9 +6,9 @@ import {
   BottomSheetView,
 } from '@gorhom/bottom-sheet';
 
-import { Square } from 'phosphor-react-native';
+import uuid from 'react-native-uuid';
 
-import { IObservationDTO } from '@dtos/observation-dto';
+import { CheckSquare, Square } from 'phosphor-react-native';
 
 import { TextArea } from '@components/Form/TextArea';
 import { Button } from '@components/Form/Button';
@@ -21,40 +21,75 @@ import {
   ObservationItemName,
   ObservationItemCheckButton,
 } from './styles';
+import { IObservationDTO } from '@dtos/observation-dto';
 
 interface IObservationBottomSheetModalProps {
   bottomSheetModalRef?: RefObject<BottomSheetModal>;
-  onAddObservation: () => void;
+  onAddObservation: (observations: IObservationDTO[]) => void;
 }
 
 export function ObservationBottomSheetModal({
   bottomSheetModalRef,
   onAddObservation,
 }: IObservationBottomSheetModalProps) {
-  const [observationsSelected, setObservationsSelected] = useState<
+  const [selectedObservations, setSelectedObservations] = useState<
     IObservationDTO[]
   >([]);
+  const [freeObservation, setFreeObservation] = useState('');
 
   const snapPoints = useMemo(() => ['50%', '90%'], []);
 
   // FUNCTIONS
   const handleSelectedObservation = useCallback(
     (observation: IObservationDTO) => {
-      if (observationsSelected.length === 0) {
-        setObservationsSelected([observation]);
+      if (selectedObservations.length === 0) {
+        setSelectedObservations([observation]);
 
         return;
       }
 
-      if (observationsSelected.length > 0) {
-        const observationFindIndex = observationsSelected.findIndex(
+      if (selectedObservations.length > 0) {
+        const observationFindIndex = selectedObservations.findIndex(
           (obs) => obs.id === observation.id,
         );
-        console.log('🚀 ~ observationFindIndex:', observationFindIndex);
+
+        if (observationFindIndex !== -1) {
+          const removeObservation = selectedObservations.filter(
+            (obs) => obs.id !== observation.id,
+          );
+
+          setSelectedObservations(removeObservation);
+        } else {
+          setSelectedObservations((oldState) => [...oldState, observation]);
+        }
       }
     },
-    [observationsSelected],
+    [selectedObservations],
   );
+
+  const handleAddObservations = useCallback(() => {
+    const addObservations: IObservationDTO[] = [];
+
+    addObservations.push(...selectedObservations);
+
+    if (freeObservation !== '') {
+      const freeObservationData = {
+        id: uuid.v4().toString(),
+        name: freeObservation,
+      };
+
+      addObservations.push(freeObservationData);
+    }
+
+    onAddObservation(addObservations);
+
+    bottomSheetModalRef?.current?.dismiss();
+  }, [
+    freeObservation,
+    selectedObservations,
+    onAddObservation,
+    bottomSheetModalRef,
+  ]);
   // END FUNCTIONS
 
   return (
@@ -75,6 +110,10 @@ export function ObservationBottomSheetModal({
                   id: '1',
                   name: 'Sem orégano',
                 },
+                {
+                  id: '2',
+                  name: 'Sem tomate',
+                },
               ]}
               keyExtractor={(item) => item.id}
               renderItem={({ item: observation }) => (
@@ -85,7 +124,13 @@ export function ObservationBottomSheetModal({
                     handleSelectedObservation(observation);
                   }}
                 >
-                  <Square />
+                  {selectedObservations.some(
+                    (obs) => obs.id === observation.id,
+                  ) ? (
+                    <CheckSquare />
+                  ) : (
+                    <Square />
+                  )}
 
                   <ObservationItemName>{observation.name}</ObservationItemName>
                 </ObservationItemCheckButton>
@@ -93,15 +138,16 @@ export function ObservationBottomSheetModal({
               )}
             />
 
-            <TextArea placeholder="Digite sua observação" />
+            <TextArea
+              placeholder="Digite sua observação"
+              value={freeObservation}
+              onChangeText={(text) => {
+                setFreeObservation(text);
+              }}
+            />
 
             <ObservationFooterContainer>
-              <Button
-                style={{ maxWidth: 150 }}
-                onPress={() => {
-                  onAddObservation();
-                }}
-              >
+              <Button style={{ maxWidth: 150 }} onPress={handleAddObservations}>
                 Adicionar
               </Button>
             </ObservationFooterContainer>

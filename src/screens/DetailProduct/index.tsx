@@ -45,6 +45,7 @@ import {
   DetailProductTitle,
   DetailProductWrapper,
 } from './styles';
+import { IObservationDTO } from '@dtos/observation-dto';
 
 export type IAdditionalItem = {
   id: string;
@@ -62,6 +63,9 @@ const DIVISOR_CENTS = 100;
 
 export function DetailProductScreen() {
   const [quantity, setQuantity] = useState(1);
+  const [selectedObservations, setSelectedObservations] = useState<
+    IObservationDTO[]
+  >([]);
 
   const theme = useTheme();
   const navigation = useNavigation();
@@ -81,11 +85,12 @@ export function DetailProductScreen() {
     observationBottomSheetModalRef.current?.present();
   }, []);
 
-  const handleAddObservations = useCallback(async () => {
-    console.log('observações adicionadas');
-
-    observationBottomSheetModalRef.current?.dismiss();
-  }, []);
+  const handleAddObservations = useCallback(
+    async (observations: IObservationDTO[]) => {
+      setSelectedObservations(observations);
+    },
+    [],
+  );
 
   const handleAddMinus = useCallback(() => {
     const quantityNumber = Number(quantity);
@@ -196,7 +201,7 @@ export function DetailProductScreen() {
               )}
               ListEmptyComponent={() => (
                 <DetailProductEmptyListText>
-                  Nenhum adicional escolhido
+                  Nenhum adicional
                 </DetailProductEmptyListText>
               )}
             />
@@ -209,18 +214,13 @@ export function DetailProductScreen() {
 
             <DetailProductObservationList
               contentContainerStyle={
-                1 + 2 === 2 && {
+                selectedObservations.length === 0 && {
                   flex: 1,
                   alignItems: 'center',
                   justifyContent: 'center',
                 }
               }
-              data={[
-                {
-                  id: '1',
-                  name: 'Sem orégano',
-                },
-              ]}
+              data={selectedObservations}
               keyExtractor={(item) => item.id}
               renderItem={({ item: observation }) => (
                 <DetailProductAdditionalAndObservationItemWrapper>
@@ -231,7 +231,7 @@ export function DetailProductScreen() {
               )}
               ListEmptyComponent={() => (
                 <DetailProductEmptyListText>
-                  Nenhum adicional escolhido
+                  Nenhuma observação
                 </DetailProductEmptyListText>
               )}
             />
