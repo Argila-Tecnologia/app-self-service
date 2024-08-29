@@ -73,12 +73,18 @@ export function DetailProductScreen() {
     navigation.navigate('homeScreen');
   }, [navigation]);
 
-  const handleAdditionalPresentModal = useCallback(() => {
+  const handleOpenAdditionalModal = useCallback(() => {
     additionalBottomSheetModalRef.current?.present();
   }, []);
 
-  const handleObservationPresentModal = useCallback(() => {
+  const handleOpenObservationModal = useCallback(() => {
     observationBottomSheetModalRef.current?.present();
+  }, []);
+
+  const handleAddObservations = useCallback(async () => {
+    console.log('observações adicionadas');
+
+    observationBottomSheetModalRef.current?.dismiss();
   }, []);
 
   const handleAddMinus = useCallback(() => {
@@ -238,12 +244,12 @@ export function DetailProductScreen() {
           <Button
             style={{ marginRight: 16 }}
             size="small"
-            onPress={handleAdditionalPresentModal}
+            onPress={handleOpenAdditionalModal}
           >
             Adicionais
           </Button>
 
-          <Button size="small" onPress={handleObservationPresentModal}>
+          <Button size="small" onPress={handleOpenObservationModal}>
             Observações
           </Button>
         </DetailProductFooterAdditionalProductObservationWrapper>
@@ -283,6 +289,7 @@ export function DetailProductScreen() {
 
       <ObservationBottomSheetModal
         bottomSheetModalRef={observationBottomSheetModalRef}
+        onAddObservation={handleAddObservations}
       />
       {/* END MODALS */}
     </DetailProductContainer>
