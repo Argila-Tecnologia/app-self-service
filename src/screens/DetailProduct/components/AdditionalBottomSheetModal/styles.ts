@@ -1,6 +1,7 @@
 import { styled } from '@theme/stitches.config';
 
-import { BottomSheetFlatList } from '@gorhom/bottom-sheet';
+import { BottomSheetSectionList } from '@gorhom/bottom-sheet';
+import { IAdditionalItemsProps, ISectionAdditionalProps } from '.';
 
 export const AdditionalContainer = styled('View', {
   flex: 1,
@@ -19,7 +20,10 @@ export const AdditionalTitle = styled('Text', {
   marginBottom: 16,
 });
 
-export const AdditionalList = styled(BottomSheetFlatList, {});
+export const AdditionalList = styled(
+  BottomSheetSectionList<IAdditionalItemsProps, ISectionAdditionalProps>,
+  {},
+);
 
 export const AdditionalFooterContainer = styled('View', {
   // minHeight: 70,

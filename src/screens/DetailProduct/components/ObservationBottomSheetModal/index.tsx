@@ -3,7 +3,6 @@ import { RefObject, useCallback, useMemo, useState } from 'react';
 import {
   BottomSheetModal,
   BottomSheetModalProvider,
-  BottomSheetView,
 } from '@gorhom/bottom-sheet';
 
 import uuid from 'react-native-uuid';
@@ -103,55 +102,53 @@ export function ObservationBottomSheetModal({
         <ObservationContainer>
           <ObservationTitle>Observações</ObservationTitle>
 
-          <BottomSheetView style={{ flex: 1 }}>
-            <ObservationList
-              data={[
-                {
-                  id: '1',
-                  name: 'Sem orégano',
-                },
-                {
-                  id: '2',
-                  name: 'Sem tomate',
-                },
-              ]}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item: observation }) => (
-                // <ObservationItemContainer>
-                <ObservationItemCheckButton
-                  activeOpacity={0.7}
-                  onPress={() => {
-                    handleSelectedObservation(observation);
-                  }}
-                >
-                  {selectedObservations.some(
-                    (obs) => obs.id === observation.id,
-                  ) ? (
-                    <CheckSquare />
-                  ) : (
-                    <Square />
-                  )}
+          {/* <BottomSheetView style={{ flex: 1 }}> */}
+          <ObservationList
+            data={[
+              {
+                id: '1',
+                name: 'Sem orégano',
+              },
+              {
+                id: '2',
+                name: 'Sem tomate',
+              },
+            ]}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item: observation }) => (
+              <ObservationItemCheckButton
+                activeOpacity={0.7}
+                onPress={() => {
+                  handleSelectedObservation(observation);
+                }}
+              >
+                {selectedObservations.some(
+                  (obs) => obs.id === observation.id,
+                ) ? (
+                  <CheckSquare />
+                ) : (
+                  <Square />
+                )}
 
-                  <ObservationItemName>{observation.name}</ObservationItemName>
-                </ObservationItemCheckButton>
-                // </ObservationItemContainer>
-              )}
-            />
+                <ObservationItemName>{observation.name}</ObservationItemName>
+              </ObservationItemCheckButton>
+            )}
+          />
 
-            <TextArea
-              placeholder="Digite sua observação"
-              value={freeObservation}
-              onChangeText={(text) => {
-                setFreeObservation(text);
-              }}
-            />
+          <TextArea
+            placeholder="Digite sua observação"
+            value={freeObservation}
+            onChangeText={(text) => {
+              setFreeObservation(text);
+            }}
+          />
 
-            <ObservationFooterContainer>
-              <Button style={{ maxWidth: 150 }} onPress={handleAddObservations}>
-                Adicionar
-              </Button>
-            </ObservationFooterContainer>
-          </BottomSheetView>
+          <ObservationFooterContainer>
+            <Button style={{ maxWidth: 150 }} onPress={handleAddObservations}>
+              Adicionar
+            </Button>
+          </ObservationFooterContainer>
+          {/* </BottomSheetView> */}
         </ObservationContainer>
       </BottomSheetModal>
     </BottomSheetModalProvider>
