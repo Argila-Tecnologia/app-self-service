@@ -20,13 +20,60 @@ export const AdditionalTitle = styled('Text', {
   marginBottom: 16,
 });
 
-export const AdditionalList = styled(
+export const AdditionalSectionList = styled(
   BottomSheetSectionList<IAdditionalItemsProps, ISectionAdditionalProps>,
-  {},
+  {
+    paddingHorizontal: 10,
+  },
 );
 
+export const AdditionalSectionTitle = styled('Text', {
+  fontFamily: '$BOLD',
+  fontSize: '$LG',
+  color: '$GRAY_600',
+
+  paddingVertical: 10,
+});
+
+export const AdditionalSectionItemContainer = styled('View', {
+  flexDirection: 'row',
+  alignContent: 'center',
+});
+
+export const AdditionalSectionItemNameAndPriceContainer = styled('View', {
+  flex: 1,
+  flexDirection: 'row',
+  alignItems: 'center',
+
+  marginRight: 10,
+  marginBottom: 10,
+});
+
+export const AdditionalSectionItemName = styled('Text', {
+  fontFamily: '$REGULAR',
+  fontSize: '$MD',
+  color: '$GRAY_600',
+
+  marginRight: 10,
+});
+
+export const AdditionalSectionItemPrice = styled('Text', {
+  fontFamily: '$BOLD',
+  fontSize: '$MD',
+  color: '$GRAY_600',
+});
+
+export const AdditionalSectionItemQuantityContainer = styled('View', {
+  flexDirection: 'row',
+});
+
+export const AdditionalSectionItemQuantity = styled('Text', {
+  fontFamily: '$BOLD',
+  fontSize: '$MD',
+  color: '$GRAY_600',
+});
+
 export const AdditionalFooterContainer = styled('View', {
-  // minHeight: 70,
   flexDirection: 'row',
   alignItems: 'center',
   justifyContent: 'flex-end',
