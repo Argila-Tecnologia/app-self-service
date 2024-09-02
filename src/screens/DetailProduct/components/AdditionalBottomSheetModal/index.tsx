@@ -15,6 +15,8 @@ import {
   AdditionalSectionItemNameAndPriceContainer,
   AdditionalSectionItemPrice,
   AdditionalSectionItemQuantity,
+  AdditionalSectionItemQuantityButton,
+  AdditionalSectionItemQuantityButtonText,
   AdditionalSectionItemQuantityContainer,
   AdditionalSectionList,
   AdditionalSectionTitle,
@@ -578,9 +580,21 @@ export function AdditionalBottomSheetModal({
                 </AdditionalSectionItemNameAndPriceContainer>
 
                 <AdditionalSectionItemQuantityContainer>
+                  <AdditionalSectionItemQuantityButton>
+                    <AdditionalSectionItemQuantityButtonText>
+                      -
+                    </AdditionalSectionItemQuantityButtonText>
+                  </AdditionalSectionItemQuantityButton>
+
                   <AdditionalSectionItemQuantity>
                     {additional.quantity.toString()}
                   </AdditionalSectionItemQuantity>
+
+                  <AdditionalSectionItemQuantityButton>
+                    <AdditionalSectionItemQuantityButtonText>
+                      +
+                    </AdditionalSectionItemQuantityButtonText>
+                  </AdditionalSectionItemQuantityButton>
                 </AdditionalSectionItemQuantityContainer>
               </AdditionalSectionItemContainer>
             )}
