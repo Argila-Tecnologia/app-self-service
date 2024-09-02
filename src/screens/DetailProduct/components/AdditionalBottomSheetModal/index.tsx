@@ -1,4 +1,4 @@
-import { RefObject, useMemo } from 'react';
+import { RefObject, useCallback, useMemo, useState } from 'react';
 
 import {
   BottomSheetModal,
@@ -15,8 +15,6 @@ import {
   AdditionalSectionItemNameAndPriceContainer,
   AdditionalSectionItemPrice,
   AdditionalSectionItemQuantity,
-  AdditionalSectionItemQuantityButton,
-  AdditionalSectionItemQuantityButtonText,
   AdditionalSectionItemQuantityContainer,
   AdditionalSectionList,
   AdditionalSectionTitle,
@@ -71,477 +69,50 @@ const DATA: ISectionAdditionalProps[] = [
       },
     ],
   },
-  {
-    title: 'Main dishes',
-    data: [
-      {
-        id: '1',
-        name: 'Passas',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '2',
-        name: 'Uva',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '3',
-        name: 'Arroz',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-    ],
-  },
-  {
-    title: 'Main dishes',
-    data: [
-      {
-        id: '1',
-        name: 'Passas',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '2',
-        name: 'Uva',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '3',
-        name: 'Arroz',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-    ],
-  },
-  {
-    title: 'Main dishes',
-    data: [
-      {
-        id: '1',
-        name: 'Passas',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '2',
-        name: 'Uva',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '3',
-        name: 'Arroz',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-    ],
-  },
-  {
-    title: 'Main dishes',
-    data: [
-      {
-        id: '1',
-        name: 'Passas',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '2',
-        name: 'Uva',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '3',
-        name: 'Arroz',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-    ],
-  },
-  {
-    title: 'Main dishes',
-    data: [
-      {
-        id: '1',
-        name: 'Passas',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '2',
-        name: 'Uva',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '3',
-        name: 'Arroz',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-    ],
-  },
-  {
-    title: 'Main dishes',
-    data: [
-      {
-        id: '1',
-        name: 'Passas',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '2',
-        name: 'Uva',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '3',
-        name: 'Arroz',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-    ],
-  },
-  {
-    title: 'Main dishes',
-    data: [
-      {
-        id: '1',
-        name: 'Passas',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '2',
-        name: 'Uva',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '3',
-        name: 'Arroz',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-    ],
-  },
-  {
-    title: 'Main dishes',
-    data: [
-      {
-        id: '1',
-        name: 'Passas',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '2',
-        name: 'Uva',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '3',
-        name: 'Arroz',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-    ],
-  },
-
-  {
-    title: 'Main dishes',
-    data: [
-      {
-        id: '1',
-        name: 'Passas',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '2',
-        name: 'Uva',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '3',
-        name: 'Arroz',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-    ],
-  },
-  {
-    title: 'Main dishes',
-    data: [
-      {
-        id: '1',
-        name: 'Passas',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '2',
-        name: 'Uva',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '3',
-        name: 'Arroz',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-    ],
-  },
-  {
-    title: 'Main dishes',
-    data: [
-      {
-        id: '1',
-        name: 'Passas',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '2',
-        name: 'Uva',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '3',
-        name: 'Arroz',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-    ],
-  },
-  {
-    title: 'Main dishes',
-    data: [
-      {
-        id: '1',
-        name: 'Passas',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '2',
-        name: 'Uva',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '3',
-        name: 'Arroz',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-    ],
-  },
-  {
-    title: 'Main dishes',
-    data: [
-      {
-        id: '1',
-        name: 'Passas',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '2',
-        name: 'Uva',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '3',
-        name: 'Arroz',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-    ],
-  },
-  {
-    title: 'Main dishes',
-    data: [
-      {
-        id: '1',
-        name: 'Passas',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '2',
-        name: 'Uva',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '3',
-        name: 'Arroz',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-    ],
-  },
-  {
-    title: 'Main dishes',
-    data: [
-      {
-        id: '1',
-        name: 'Passas',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '2',
-        name: 'Uva',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '3',
-        name: 'Arroz',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-    ],
-  },
-  {
-    title: 'Main dishes',
-    data: [
-      {
-        id: '1',
-        name: 'Passas',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '2',
-        name: 'Uva',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-      {
-        id: '3',
-        name: 'Arroz',
-        quantity: 0,
-        price: 500,
-        minQuantity: 1,
-        maxQuantity: 2,
-      },
-    ],
-  },
 ];
 
 export function AdditionalBottomSheetModal({
   bottomSheetModalRef,
 }: IAdditionalBottomSheetModalProps) {
+  const [additionalData, setAdditionalData] =
+    useState<ISectionAdditionalProps[]>(DATA);
+
   const snapPoints = useMemo(() => ['50%', '90%'], []);
+
+  // FUNCTIONS
+  const handlePlusQuantityAdditional = useCallback(
+    (additional: IAdditionalItemsProps) => {
+      const additionalCopy = additionalData;
+
+      const additionalUpdate = additionalCopy.map((additionalItem) => {
+        const additionalFind = additionalItem.data.findIndex(
+          (ad) => ad.id === additional.id,
+        );
+
+        if (additionalFind !== -1) {
+          const item = additionalItem.data[additionalFind];
+
+          item.quantity = item.quantity + 1;
+        }
+
+        return additionalItem;
+      });
+
+      // let dataAdd: IAdditionalItemsProps | null = null;
+
+      // additionalCopy.forEach((a) => {
+      //   const find = a.data.find((ad) => ad.id === additional.id);
+
+      //   if (find) {
+      //     dataAdd = find;
+      //   }
+      // });
+
+      setAdditionalData(additionalUpdate);
+    },
+    [additionalData],
+  );
+  // END FUNCTIONS
 
   return (
     <BottomSheetModalProvider>
@@ -556,7 +127,7 @@ export function AdditionalBottomSheetModal({
 
           <AdditionalSectionList
             showsVerticalScrollIndicator={false}
-            sections={DATA}
+            sections={additionalData}
             keyExtractor={(item) => `${item.id}`}
             renderSectionHeader={({ section }) => (
               <AdditionalSectionTitle>{section.title}</AdditionalSectionTitle>
@@ -580,21 +151,26 @@ export function AdditionalBottomSheetModal({
                 </AdditionalSectionItemNameAndPriceContainer>
 
                 <AdditionalSectionItemQuantityContainer>
-                  <AdditionalSectionItemQuantityButton>
-                    <AdditionalSectionItemQuantityButtonText>
-                      -
-                    </AdditionalSectionItemQuantityButtonText>
-                  </AdditionalSectionItemQuantityButton>
+                  <Button
+                    style={{ minHeight: 50, maxHeight: 50 }}
+                    textSize="XXL"
+                  >
+                    -
+                  </Button>
 
                   <AdditionalSectionItemQuantity>
                     {additional.quantity.toString()}
                   </AdditionalSectionItemQuantity>
 
-                  <AdditionalSectionItemQuantityButton>
-                    <AdditionalSectionItemQuantityButtonText>
-                      +
-                    </AdditionalSectionItemQuantityButtonText>
-                  </AdditionalSectionItemQuantityButton>
+                  <Button
+                    style={{ minHeight: 50, maxHeight: 50 }}
+                    textSize="XXL"
+                    onPress={() => {
+                      handlePlusQuantityAdditional(additional);
+                    }}
+                  >
+                    +
+                  </Button>
                 </AdditionalSectionItemQuantityContainer>
               </AdditionalSectionItemContainer>
             )}

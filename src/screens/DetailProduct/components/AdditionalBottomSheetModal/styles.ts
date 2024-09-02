@@ -67,35 +67,13 @@ export const AdditionalSectionItemPrice = styled('Text', {
 
 export const AdditionalSectionItemQuantityContainer = styled('View', {
   width: 150,
-  minHeight: 40,
-  maxHeight: 40,
+  minHeight: 50,
+  maxHeight: 50,
 
   flexDirection: 'row',
 
   alignItems: 'center',
   justifyContent: 'center',
-});
-
-export const AdditionalSectionItemQuantityButton = styled('TouchableOpacity', {
-  minHeight: 40,
-  maxHeight: 40,
-
-  flex: 1,
-
-  alignItems: 'center',
-  justifyContent: 'center',
-
-  borderRadius: 10,
-
-  backgroundColor: '$RED',
-});
-
-export const AdditionalSectionItemQuantityButtonText = styled('Text', {
-  fontFamily: '$REGULAR',
-  fontSize: '$LG',
-  color: '$WHITE',
-
-  backgroundColor: '$RED',
 });
 
 export const AdditionalSectionItemQuantity = styled('Text', {
