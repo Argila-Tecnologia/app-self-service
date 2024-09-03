@@ -16,7 +16,7 @@ export const ButtonContainer = styled('TouchableOpacity', {
   alignItems: 'center',
   justifyContent: 'center',
 
-  backgroundColor: '$RED',
+  backgroundColor: '$RED_600',
 
   borderRadius: 10,
 
@@ -25,6 +25,11 @@ export const ButtonContainer = styled('TouchableOpacity', {
       small: {
         minWidth: 150,
         maxWidth: 150,
+      },
+    },
+    is_disabled: {
+      true: {
+        backgroundColor: '$RED_400',
       },
     },
   },

@@ -22,7 +22,7 @@ export const HeaderLogo = styled('View', {
   alignItems: 'center',
   justifyContent: 'center',
 
-  backgroundColor: '$RED',
+  backgroundColor: '$RED_600',
 });
 
 export const HeaderTableNumberContainer = styled('View', {
@@ -111,7 +111,7 @@ export const HeaderActionButton = styled('TouchableOpacity', {
   alignItems: 'center',
   justifyContent: 'center',
 
-  backgroundColor: '$RED',
+  backgroundColor: '$RED_600',
 
   borderRightWidth: 1,
   borderRightColor: '$WHITE',

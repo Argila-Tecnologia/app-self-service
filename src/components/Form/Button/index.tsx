@@ -11,17 +11,24 @@ interface IButtonProps
     TouchableOpacityProps {
   children: ReactNode;
   isLoading?: boolean;
+  isDisabled?: boolean;
   textSize?: 'XS' | 'SM' | 'MD' | 'LG' | 'XL' | 'XXL' | 'XXXL';
 }
 
 export function Button({
   children,
   isLoading = false,
+  isDisabled = false,
   textSize = 'MD',
   ...rest
 }: IButtonProps) {
   return (
-    <ButtonContainer disabled={isLoading} activeOpacity={0.7} {...rest}>
+    <ButtonContainer
+      disabled={isLoading}
+      is_disabled={isDisabled}
+      activeOpacity={0.7}
+      {...rest}
+    >
       {isLoading ? (
         <Loading />
       ) : (

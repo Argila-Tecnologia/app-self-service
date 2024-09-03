@@ -1,9 +1,11 @@
-import { RefObject, useCallback, useMemo, useState } from 'react';
+import { RefObject, useCallback, useEffect, useMemo, useState } from 'react';
 
 import {
   BottomSheetModal,
   BottomSheetModalProvider,
 } from '@gorhom/bottom-sheet';
+
+import { IAdditionalDTO } from '@dtos/additional-dto';
 
 import { Button } from '@components/Form/Button';
 
@@ -21,22 +23,17 @@ import {
   AdditionalTitle,
 } from './styles';
 
-interface IAdditionalBottomSheetModalProps {
-  bottomSheetModalRef?: RefObject<BottomSheetModal>;
-}
-
-export interface IAdditionalItemsProps {
+interface IAdditionalItemSelected {
   id: string;
   name: string;
   quantity: number;
   price: number;
-  minQuantity: number;
-  maxQuantity: number;
+  total: number;
 }
 
 export interface ISectionAdditionalProps {
   title: string;
-  data: IAdditionalItemsProps[];
+  data: IAdditionalDTO[];
 }
 
 const DATA: ISectionAdditionalProps[] = [
@@ -71,17 +68,26 @@ const DATA: ISectionAdditionalProps[] = [
   },
 ];
 
+interface IAdditionalBottomSheetModalProps {
+  bottomSheetModalRef?: RefObject<BottomSheetModal>;
+}
+
 export function AdditionalBottomSheetModal({
   bottomSheetModalRef,
 }: IAdditionalBottomSheetModalProps) {
-  const [additionalData, setAdditionalData] =
-    useState<ISectionAdditionalProps[]>(DATA);
+  const [additionalData, setAdditionalData] = useState<
+    ISectionAdditionalProps[]
+  >([]);
+
+  const [additionalItemSelected, setAdditionalItemSelected] = useState<
+    IAdditionalItemSelected[]
+  >([]);
 
   const snapPoints = useMemo(() => ['50%', '90%'], []);
 
   // FUNCTIONS
   const handlePlusQuantityAdditional = useCallback(
-    (additional: IAdditionalItemsProps) => {
+    (additional: IAdditionalDTO) => {
       const additionalCopy = additionalData;
 
       const additionalUpdate = additionalCopy.map((additionalItem) => {
@@ -92,7 +98,9 @@ export function AdditionalBottomSheetModal({
         if (additionalFind !== -1) {
           const item = additionalItem.data[additionalFind];
 
-          item.quantity = item.quantity + 1;
+          const plusQuantity = item.quantity + 1;
+
+          item.quantity = plusQuantity;
         }
 
         return additionalItem;
@@ -112,7 +120,58 @@ export function AdditionalBottomSheetModal({
     },
     [additionalData],
   );
+
+  const handleSubQuantityAdditional = useCallback(
+    (additional: IAdditionalDTO) => {
+      const additionalCopy = additionalData;
+
+      const additionalUpdate = additionalCopy.map((additionalItem) => {
+        const additionalFind = additionalItem.data.findIndex(
+          (ad) => ad.id === additional.id,
+        );
+
+        if (additionalFind !== -1) {
+          const item = additionalItem.data[additionalFind];
+
+          const subQuantity = item.quantity - 1;
+
+          if (subQuantity <= 0) {
+            item.quantity = 0;
+          } else {
+            item.quantity = subQuantity;
+          }
+        }
+
+        return additionalItem;
+      });
+
+      // let dataAdd: IAdditionalItemsProps | null = null;
+
+      // additionalCopy.forEach((a) => {
+      //   const find = a.data.find((ad) => ad.id === additional.id);
+
+      //   if (find) {
+      //     dataAdd = find;
+      //   }
+      // });
+
+      setAdditionalData(additionalUpdate);
+    },
+    [additionalData],
+  );
+
+  const loadSectionData = useCallback(() => {
+    // setAdditionalData(sectionAdditionalData);
+    console.log('load');
+    setTimeout(() => {
+      setAdditionalData(DATA);
+    }, 5000);
+  }, []);
   // END FUNCTIONS
+
+  useEffect(() => {
+    loadSectionData();
+  }, [loadSectionData]);
 
   return (
     <BottomSheetModalProvider>
@@ -154,6 +213,9 @@ export function AdditionalBottomSheetModal({
                   <Button
                     style={{ minHeight: 50, maxHeight: 50 }}
                     textSize="XXL"
+                    onPress={() => {
+                      handleSubQuantityAdditional(additional);
+                    }}
                   >
                     -
                   </Button>
@@ -168,6 +230,8 @@ export function AdditionalBottomSheetModal({
                     onPress={() => {
                       handlePlusQuantityAdditional(additional);
                     }}
+                    disabled={additional.quantity === additional.maxQuantity}
+                    isDisabled={additional.quantity === additional.maxQuantity}
                   >
                     +
                   </Button>

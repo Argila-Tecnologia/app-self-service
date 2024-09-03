@@ -1,7 +1,8 @@
 import { styled } from '@theme/stitches.config';
 
 import { BottomSheetSectionList } from '@gorhom/bottom-sheet';
-import { IAdditionalItemsProps, ISectionAdditionalProps } from '.';
+import { ISectionAdditionalProps } from '.';
+import { IAdditionalDTO } from '@dtos/additional-dto';
 
 export const AdditionalContainer = styled('View', {
   flex: 1,
@@ -21,7 +22,7 @@ export const AdditionalTitle = styled('Text', {
 });
 
 export const AdditionalSectionList = styled(
-  BottomSheetSectionList<IAdditionalItemsProps, ISectionAdditionalProps>,
+  BottomSheetSectionList<IAdditionalDTO, ISectionAdditionalProps>,
   {
     paddingHorizontal: 10,
   },

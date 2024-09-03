@@ -10,11 +10,14 @@ import { useTheme } from '@theme/stitches.config';
 
 import { BottomSheetModal } from '@gorhom/bottom-sheet';
 
+import { IAdditionalDTO } from '@dtos/additional-dto';
+import { IObservationDTO } from '@dtos/observation-dto';
+
 import PizzaImg from '@assets/pizza-portuguesa.jpg';
 
 import { Header } from '@components/Header';
 import { Button } from '@components/Form/Button';
-import { AdditionalBottomSheetModal } from '@screens/DetailProduct/components/AdditionalBottomSheetModal';
+import { AdditionalBottomSheetModal } from './components/AdditionalBottomSheetModal';
 import { ObservationBottomSheetModal } from './components/ObservationBottomSheetModal';
 
 import {
@@ -45,7 +48,6 @@ import {
   DetailProductTitle,
   DetailProductWrapper,
 } from './styles';
-import { IObservationDTO } from '@dtos/observation-dto';
 
 export type IAdditionalItem = {
   id: string;
@@ -61,6 +63,11 @@ export type IObservationItem = {
 
 const DIVISOR_CENTS = 100;
 
+export interface ISectionAdditionalProps {
+  title: string;
+  data: IAdditionalDTO[];
+}
+
 export function DetailProductScreen() {
   const [quantity, setQuantity] = useState(1);
   const [selectedObservations, setSelectedObservations] = useState<
@@ -70,6 +77,7 @@ export function DetailProductScreen() {
   const theme = useTheme();
   const navigation = useNavigation();
   const additionalBottomSheetModalRef = useRef<BottomSheetModal>(null);
+
   const observationBottomSheetModalRef = useRef<BottomSheetModal>(null);
 
   // FUNCTIONS

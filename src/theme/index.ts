@@ -15,7 +15,8 @@ export default {
     GRAY_700: '#29292E',
     GRAY_600: '#323238',
 
-    RED: 'red',
+    RED_400: '#F87171',
+    RED_600: '#DC2626',
   },
   FONT_FAMILY: {
     REGULAR: 'Roboto_400Regular',

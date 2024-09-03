@@ -17,7 +17,7 @@ export const TextAreaContainer = styled('View', {
   variants: {
     error: {
       true: {
-        borderColor: '$RED',
+        borderColor: '$RED_600',
       },
     },
   },

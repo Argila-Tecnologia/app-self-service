@@ -34,7 +34,7 @@ export const MenuCategoryItemButton = styled('TouchableOpacity', {
   variants: {
     selected: {
       true: {
-        backgroundColor: '$RED',
+        backgroundColor: '$RED_600',
       },
     },
   },

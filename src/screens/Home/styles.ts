@@ -41,7 +41,7 @@ export const HomeCategoryItemButton = styled('TouchableOpacity', {
   variants: {
     selected: {
       true: {
-        backgroundColor: '$RED',
+        backgroundColor: '$RED_600',
       },
     },
   },
