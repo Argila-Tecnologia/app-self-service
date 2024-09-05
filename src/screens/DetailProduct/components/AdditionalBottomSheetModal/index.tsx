@@ -70,17 +70,19 @@ const DATA: ISectionAdditionalProps[] = [
 
 interface IAdditionalBottomSheetModalProps {
   bottomSheetModalRef?: RefObject<BottomSheetModal>;
+  addAdditional: (additional: IAdditionalItemSelected[]) => void;
 }
 
 export function AdditionalBottomSheetModal({
   bottomSheetModalRef,
+  addAdditional,
 }: IAdditionalBottomSheetModalProps) {
   const [additionalData, setAdditionalData] =
     useState<ISectionAdditionalProps[]>(DATA);
 
-  const [additionalItemSelected, setAdditionalItemSelected] = useState<
-    IAdditionalItemSelected[]
-  >([]);
+  // const [additionalItemSelected, setAdditionalItemSelected] = useState<
+  //   IAdditionalItemSelected[]
+  // >([]);
 
   const snapPoints = useMemo(() => ['50%', '90%'], []);
 
@@ -105,16 +107,6 @@ export function AdditionalBottomSheetModal({
         return additionalItem;
       });
 
-      // let dataAdd: IAdditionalItemsProps | null = null;
-
-      // additionalCopy.forEach((a) => {
-      //   const find = a.data.find((ad) => ad.id === additional.id);
-
-      //   if (find) {
-      //     dataAdd = find;
-      //   }
-      // });
-
       setAdditionalData(additionalUpdate);
     },
     [additionalData],
@@ -124,13 +116,13 @@ export function AdditionalBottomSheetModal({
     (additional: IAdditionalDTO) => {
       const additionalCopy = additionalData;
 
-      const additionalUpdate = additionalCopy.map((additionalItem) => {
-        const additionalFind = additionalItem.data.findIndex(
-          (ad) => ad.id === additional.id,
+      const additionalUpdate = additionalCopy.map((section) => {
+        const additionalFind = section.data.findIndex(
+          (item) => item.id === additional.id,
         );
 
         if (additionalFind !== -1) {
-          const item = additionalItem.data[additionalFind];
+          const item = section.data[additionalFind];
 
           const subQuantity = item.quantity - 1;
 
@@ -141,23 +133,39 @@ export function AdditionalBottomSheetModal({
           }
         }
 
-        return additionalItem;
+        return section;
       });
-
-      // let dataAdd: IAdditionalItemsProps | null = null;
-
-      // additionalCopy.forEach((a) => {
-      //   const find = a.data.find((ad) => ad.id === additional.id);
-
-      //   if (find) {
-      //     dataAdd = find;
-      //   }
-      // });
 
       setAdditionalData(additionalUpdate);
     },
     [additionalData],
   );
+
+  const handleSaveAdditional = useCallback(() => {
+    const additionalChosen: IAdditionalItemSelected[] = [];
+
+    const additionalDataCopy = additionalData;
+
+    additionalDataCopy.forEach((section) => {
+      section.data.forEach((item) => {
+        if (item.quantity > 0) {
+          const total = item.price * item.quantity;
+
+          const additionalItem: IAdditionalItemSelected = {
+            id: item.id,
+            name: item.name,
+            quantity: item.quantity,
+            price: item.price,
+            total,
+          };
+
+          additionalChosen.push(additionalItem);
+        }
+      });
+    });
+
+    addAdditional(additionalChosen);
+  }, [additionalData, addAdditional]);
 
   const resetAdditionalData = useCallback(() => {
     const resetData = DATA.map((section) => ({
@@ -240,7 +248,9 @@ export function AdditionalBottomSheetModal({
           />
 
           <AdditionalFooterContainer>
-            <Button style={{ maxWidth: 150 }}>Adicionar</Button>
+            <Button style={{ maxWidth: 150 }} onPress={handleSaveAdditional}>
+              Adicionar
+            </Button>
           </AdditionalFooterContainer>
         </AdditionalContainer>
       </BottomSheetModal>

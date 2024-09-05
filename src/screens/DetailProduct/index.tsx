@@ -49,11 +49,12 @@ import {
   DetailProductWrapper,
 } from './styles';
 
-export type IAdditionalItem = {
+type IAdditionalItemSelected = {
   id: string;
   name: string;
   quantity: number;
   price: number;
+  total: number;
 };
 
 export type IObservationItem = {
@@ -96,6 +97,13 @@ export function DetailProductScreen() {
   const handleAddObservations = useCallback(
     async (observations: IObservationDTO[]) => {
       setSelectedObservations(observations);
+    },
+    [],
+  );
+
+  const handleAddAdditional = useCallback(
+    async (additional: IAdditionalItemSelected[]) => {
+      console.log('ADDITIONAL SELECTED => ', additional);
     },
     [],
   );
@@ -293,6 +301,7 @@ export function DetailProductScreen() {
       {/* MODALS */}
       <AdditionalBottomSheetModal
         bottomSheetModalRef={additionalBottomSheetModalRef}
+        addAdditional={handleAddAdditional}
       />
 
       <ObservationBottomSheetModal

@@ -9,6 +9,8 @@ import uuid from 'react-native-uuid';
 
 import { CheckSquare, Square } from 'phosphor-react-native';
 
+import { IObservationDTO } from '@dtos/observation-dto';
+
 import { TextArea } from '@components/Form/TextArea';
 import { Button } from '@components/Form/Button';
 
@@ -20,12 +22,22 @@ import {
   ObservationItemName,
   ObservationItemCheckButton,
 } from './styles';
-import { IObservationDTO } from '@dtos/observation-dto';
 
 interface IObservationBottomSheetModalProps {
   bottomSheetModalRef?: RefObject<BottomSheetModal>;
   onAddObservation: (observations: IObservationDTO[]) => void;
 }
+
+const DATA = [
+  {
+    id: '1',
+    name: 'Sem orégano',
+  },
+  {
+    id: '2',
+    name: 'Sem tomate',
+  },
+];
 
 export function ObservationBottomSheetModal({
   bottomSheetModalRef,
@@ -66,7 +78,7 @@ export function ObservationBottomSheetModal({
     [selectedObservations],
   );
 
-  const handleAddObservations = useCallback(() => {
+  const handleSaveObservations = useCallback(() => {
     const addObservations: IObservationDTO[] = [];
 
     addObservations.push(...selectedObservations);
@@ -89,6 +101,14 @@ export function ObservationBottomSheetModal({
     onAddObservation,
     bottomSheetModalRef,
   ]);
+
+  // const resetObservationsData = useCallback(() => {
+  //   const resetData = DATA.map((section) => ({
+  //     ...section,
+  //     data: section.data.map((item) => ({ ...item, quantity: 0 })),
+  //   }));
+  //   setAdditionalData(resetData);
+  // }, []);
   // END FUNCTIONS
 
   return (
@@ -104,16 +124,7 @@ export function ObservationBottomSheetModal({
 
           {/* <BottomSheetView style={{ flex: 1 }}> */}
           <ObservationList
-            data={[
-              {
-                id: '1',
-                name: 'Sem orégano',
-              },
-              {
-                id: '2',
-                name: 'Sem tomate',
-              },
-            ]}
+            data={DATA}
             keyExtractor={(item) => item.id}
             renderItem={({ item: observation }) => (
               <ObservationItemCheckButton
@@ -144,7 +155,7 @@ export function ObservationBottomSheetModal({
           />
 
           <ObservationFooterContainer>
-            <Button style={{ maxWidth: 150 }} onPress={handleAddObservations}>
+            <Button style={{ maxWidth: 150 }} onPress={handleSaveObservations}>
               Adicionar
             </Button>
           </ObservationFooterContainer>
