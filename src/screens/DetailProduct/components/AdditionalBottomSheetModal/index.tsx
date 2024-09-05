@@ -75,9 +75,8 @@ interface IAdditionalBottomSheetModalProps {
 export function AdditionalBottomSheetModal({
   bottomSheetModalRef,
 }: IAdditionalBottomSheetModalProps) {
-  const [additionalData, setAdditionalData] = useState<
-    ISectionAdditionalProps[]
-  >([]);
+  const [additionalData, setAdditionalData] =
+    useState<ISectionAdditionalProps[]>(DATA);
 
   const [additionalItemSelected, setAdditionalItemSelected] = useState<
     IAdditionalItemSelected[]
@@ -160,18 +159,18 @@ export function AdditionalBottomSheetModal({
     [additionalData],
   );
 
-  const loadSectionData = useCallback(() => {
-    // setAdditionalData(sectionAdditionalData);
-    console.log('load');
-    setTimeout(() => {
-      setAdditionalData(DATA);
-    }, 5000);
+  const resetAdditionalData = useCallback(() => {
+    const resetData = DATA.map((section) => ({
+      ...section,
+      data: section.data.map((item) => ({ ...item, quantity: 0 })),
+    }));
+    setAdditionalData(resetData);
   }, []);
   // END FUNCTIONS
 
   useEffect(() => {
-    loadSectionData();
-  }, [loadSectionData]);
+    resetAdditionalData();
+  }, [resetAdditionalData]);
 
   return (
     <BottomSheetModalProvider>
